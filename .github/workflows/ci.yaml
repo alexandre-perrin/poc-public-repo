@@ -1,0 +1,17 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  pr-sync:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Trigger Workflow in private repo
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PAT }}
+          repository: alexandre-perrin/poc-private-repo
+          event-type: pr-sync
+          client-payload: ${{ toJSON(github) }}
