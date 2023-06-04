@@ -11,4 +11,4 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: alexandre-perrin/poc-private-repo
           event-type: pr-sync
-          client-payload: ${{ toJSON(github) }}
+          client-payload: '{"event": ${{ toJson(github.event) }}}'
