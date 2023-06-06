@@ -2,16 +2,20 @@ on:
   pull_request:
     types:
       - labeled
+      - unlabeled
+      - synchronize
+      - opened
+      - edited
 
 jobs:
   pr-label-sync:
     runs-on: ubuntu-22.04
     steps:
-      - name: Report failure from label
-        run: |
-          echo PR Tagged ${{ github.event.pull_request.labels.name }}
-          if ${{ github.event.pull_request.labels.name }} = 'private-ci-success'; then
-            exit 0
-          else
-            exit 1
-          fi
+      - name: Enforce labels
+        uses: yogevbd/enforce-label-action@2.1.0
+        with:
+          REQUIRED_LABELS_ANY: private-ci-success
+          REQUIRED_LABELS_ANY_DESCRIPTION: Requires private CI jobs to succeed
+          BANNED_LABELS: private-ci-failure
+          BANNED_LABELS_DESCRIPTION: Block if CI jobs failure
+
