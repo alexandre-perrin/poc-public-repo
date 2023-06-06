@@ -9,8 +9,11 @@ jobs:
         uses: actions-ecosystem/action-remove-labels@v1
         with:
           labels: |
-            private-check-failed
-            private-check-success
+            private-ci-cancelled
+            private-ci-skipped
+            private-ci-failure
+            private-ci-success
+          fail_on_error: false
 
       - name: Trigger Workflow in private repo
         uses: peter-evans/repository-dispatch@v2

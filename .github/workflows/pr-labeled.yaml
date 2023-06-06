@@ -10,7 +10,7 @@ jobs:
       - name: Report failure from label
         run: |
           echo PR Tagged ${{ github.event.pull_request.labels.name }}
-          if ${{ github.event.pull_request.labels.name }} = 'private-check-success'; then
+          if ${{ github.event.pull_request.labels.name }} = 'private-ci-success'; then
             exit 0
           else
             exit 1
