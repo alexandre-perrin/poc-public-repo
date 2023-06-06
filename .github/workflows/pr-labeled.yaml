@@ -8,9 +8,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Report failure from label
-        if: github.event.pull_request.labels.name == 'private-check-failed'
-        run: exit 1
-
-      - name: Report success from label
-        if: github.event.pull_request.labels.name == 'private-check-success'
-        run: exit 0
+        run: |
+          echo PR Tagged ${{ github.event.pull_request.labels.name }}
+          if ${{ github.event.pull_request.labels.name }} = 'private-check-success'; then
+            exit 0
+          else
+            exit 1
+          fi
