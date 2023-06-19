@@ -7,3 +7,4 @@ This is a POC for keeping in sync privately run CI from a private repository and
 ## Testing
 
 - test 1
+- test 2
