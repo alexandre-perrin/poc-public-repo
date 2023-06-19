@@ -1,0 +1,17 @@
+on:
+  workflow_dispatch:
+    inputs:
+      result:
+        description: Result to report
+        required: true
+
+jobs:
+  check:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: |
+          if ${{ inputs.result }} = 'success'; then
+            exit 0
+          else
+            exit 1
+          fi

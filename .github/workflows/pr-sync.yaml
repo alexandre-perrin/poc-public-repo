@@ -5,10 +5,20 @@ jobs:
   pr-sync:
     runs-on: ubuntu-22.04
     steps:
+      - name: Remove sync labels
+        uses: actions-ecosystem/action-remove-labels@v1
+        with:
+          labels: |
+            private-ci-cancelled
+            private-ci-skipped
+            private-ci-failure
+            private-ci-success
+          fail_on_error: false
+
       - name: Trigger Workflow in private repo
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.PAT }}
           repository: alexandre-perrin/poc-private-repo
           event-type: pr-sync
-          client-payload: ${{ toJSON(github) }}
+          client-payload: '{"event": ${{ toJson(github.event) }}}'
