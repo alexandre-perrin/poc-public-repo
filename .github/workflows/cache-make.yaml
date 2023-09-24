@@ -10,7 +10,9 @@ jobs:
       with:
         key: test-build
         path: 'build'
-    - run: make -d
+    - run: |
+        ls -l **
+        make -d
 
   cache-test-all:
     runs-on: ubuntu-22.04
@@ -20,4 +22,6 @@ jobs:
         key: test-all
         path: '.'
     - uses: actions/checkout@v3
-    - run: make -d
+    - run: |
+        ls -l **
+        make -d
