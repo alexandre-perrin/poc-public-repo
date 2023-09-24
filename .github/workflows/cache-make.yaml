@@ -12,16 +12,20 @@ jobs:
         path: 'build'
     - run: |
         ls -l **
-        make -d
+        make
 
   cache-test-all:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/cache@v3
+    - uses: actions/cache/restore@v3
       with:
         key: test-all
         path: '.'
     - uses: actions/checkout@v3
     - run: |
         ls -l **
-        make -d
+        make
+    - uses: actions/cache/save@v3
+      with:
+        key: test-all
+        path: '.'
