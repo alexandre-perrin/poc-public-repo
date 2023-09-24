@@ -1,0 +1,23 @@
+on:
+    push:
+
+jobs:
+  cache-test-build-only:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/cache@v3
+      with:
+        key: test-build
+        path: 'build'
+    - run: make -d
+
+  cache-test-all:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/cache@v3
+      with:
+        key: test-all
+        path: '.'
+    - uses: actions/checkout@v3
+    - run: make -d
